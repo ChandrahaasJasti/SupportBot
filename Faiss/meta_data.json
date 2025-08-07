@@ -1,0 +1,37 @@
+[
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 0,
+        "content": "# **HR and mCAS FAQ Document ** ## **Insurance & Claims ** **Parental Coverage** No, the Group Insurance Policy does not include coverage for parents. However, an Optional Parental Insurance Policy is available. To opt for this policy, please contact your respective State HR representative. **Accessing Your Medical Card** You can download your medical card by logging into the **Activ Health App** and navigating to the **\"Download Medical Card\"** section. **Policy Coverage Details** The group insurance policy generally covers **hospitalization, surgeries, and** **maternity expenses** . For a complete list of inclusions, please refer to your policy document or contact the HR department. **Filing an Insurance Claim** For cashless claims: Visit a network hospital and fill out the pre-authorization form. For reimbursement claims: Submit the following original documents to the TPA or insurer within the required timeframe: 1. \u200b Hospital bills 2. \u200b Discharge summary 3. \u200b ID proof 4. \u200b Any other relevant medical documents **Required Documents for a Claim** The necessary documents for an insurance claim are: 1. \u200b Duly filled claim form 2. \u200b Discharge summary 3. \u200b Final hospital bill 4. \u200b Prescriptions and diagnostic reports 5. \u200b ID proof 6. \u200b Bank details (for reimbursement claims) **Point of Contact for Insurance** For all insurance-related queries, please contact **Deepak Kudave** at **9834716953** . **Cashless Hospital Network** You can view the full list of empanelled hospitals that support cashless claims on the **Active Health App** . **Adding Family Members** You can add your spouse and children to the policy during the **enrollment window**, subject"
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 1,
+        "content": "to policy terms. Please contact HR for assistance. **Insurance Claim Limit** The sum insured is specified in your policy. For your specific coverage limits, please refer to your **e-card** or contact HR directly. ## **Attendance & Leave ** **Marking Attendance** Use the **Zing HR app or web portal** to punch in and out for attendance. **Remote Punching** Yes, **location-based punching is allowed**, provided that geo-tagging is active. However, remote punches after 9:30 AM may be marked as late. **Late Attendance** Yes, punching in after 9:30 AM is considered a late mark. Unregularized late marks may result in a Loss of Pay (LOP). Ensure you regularize them promptly. **Regularizing Attendance** You can regularize attendance for **multiple days at once** through the Zing HR portal. The window to regularize an absence is open for **up to 15 days** from the date of occurrence. **Checking Leave Balance** Go to the **Leave tab** in the Zing HR portal to view your current leave balances. **Applying for Leave** To apply for leave: 1. \u200b Log in to Zing HR. 2. \u200b Navigate to **Leave** - **Apply Leave** . 3. \u200b Choose the leave type and date range."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 2,
+        "content": "4. \u200b Submit for manager approval. **Holiday List** The **Holiday Calendar for 2025** is available on the HR portal. You may also request a location-specific copy from HR."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 3,
+        "content": "## **Payroll ** **Payslip Download** To download your payslip: 1. \u200b Log in to **Zing HR** . 2. \u200b Go to **Payroll** - **Payslip** . 3. \u200b Choose the desired month. 4. \u200b Click **Download** . **Payroll Cut-off Date** The payroll cut-off date is the **25th of each month** . Please ensure all necessary changes are submitted before this date. **Salary Credit Date** Salaries are typically credited by the **last working day of each month** . **Updating Bank Details** Submit a request to HR with a **cancelled cheque** or a copy of your bank passbook. Ensure this is done before the **20th of the month** for the changes to take effect in the current payroll cycle."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 4,
+        "content": "## **General HR & IT ** **ESI Card Application** If you are eligible for ESI, your ESI number will be provided by HR. You can then download your ESI card from the **ESIC portal** using your login credentials. **Updating Personal Details** You can update personal details like your address and phone number in the **\"Profile\"** section of the Zing HR portal, or you can contact HR for assistance. **ID Card Issues** For any issues with your ID card or visiting card, please contact the **HR team** . **Probation Review** Probation reviews are usually conducted at the end of **three months** . The process will be initiated by your manager or HR. **Performance Review Process** The performance review process involves a **self-review form**, followed by an evaluation from your manager. The final ratings and feedback will be discussed in a review meeting. **IT Support** For technical issues, please email **Suraj Kadam** at suraj.kadam@saarathifinance.com."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 5,
+        "content": "## **mCAS (Mobile Cash Advance System) ** **Login Issues** If you have an incorrect password, use the **\"Forgot Password\"** link on the mCAS application login screen to reset it. You will receive an OTP on your official email ID to complete the process. **Locked ID** If your ID is locked, you must contact the system administrator or send an email to request an unlock. Include your **Employee Code / User ID** in the email. **Pincode Search** If a pincode is not visible, use the **\"Search by Pincode\"** link above the country dropdown. Enter the pincode first, and the city and state will auto-populate. **Account Aggregator (AA) Report** To pull an AA report: 1. \u200b Go to **\"Check and Verification\"** in the mCAS application. 2. \u200b Click **\"Initiate\"** in the Account Aggregator section. 3. \u200b Enter the customer's mobile number. 4. \u200b The customer will receive a prompt to complete the process on their phone. 5. \u200b Once complete, you can check the **FI Report Status** and **Analytics Status** . **Installment Due Date** The standard installment due date to be selected for all customers is the **5th of the** **month** . **Collecting a Processing Fee** To collect a processing fee: 1. \u200b Go to the **\"Applicant Information\"** section. 2. \u200b Expand the options and click the **\"+\" button** to add a fee entry. 3. \u200b Choose **\"Electronic Fund Transfer\"** and tick the **\"OTP for Payment Link\"** checkbox. 4. \u200b Enter the amount and select the payment type. 5. \u200b Generate a payment link or QR code for"
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 6,
+        "content": "the customer to use. 6. \u200b After the customer pays, click **\"Check Status\"** to validate the transaction."
+    }
+]
