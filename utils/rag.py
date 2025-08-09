@@ -6,13 +6,10 @@ from trafilatura import fetch_url, extract
 import pymupdf4llm
 import numpy as np 
 import requests
-from utils.auth import LLM
-ENV_PATH=r"/home/chandrahaas/codes/test-apis/Bot/.env"
+from .auth import LLM
+ENV_PATH=r"/home/chandrahaas/codes/Bot/.env"
 """ things remaining : chunker,faiss """
 class EmbRag:
-    # cache=""
-    # urls=[]
-    # files=[]
     def __init__(self,docs_path,faiss_path):
         """faiss index creation"""
         self.llm_obj=LLM(ENV_PATH)
