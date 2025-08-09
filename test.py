@@ -1,4 +1,4 @@
-from rag import EmbRag
+from utils.rag import EmbRag
 DOCS=r"/home/chandrahaas/codes/test-apis/Bot/DOCS"
 FAISS=r"/home/chandrahaas/codes/test-apis/Bot/Faiss"
 

@@ -281,12 +281,12 @@ class EmbRag:
             return embedding / norm
     
     def queryEnhancer(self,user_input):
-        system_prompt_path=r"/home/chandrahaas/codes/test-apis/Bot/prompts/QueryEnhancer.md"
+        system_prompt_path=r"/home/chandrahaas/codes/Bot/prompts/QueryEnhancer.md"
         full_prompt=self.llm_obj.format_prompt('{replace_with_query}',user_input,system_prompt_path,isPath=True)
         return self.llm_obj.get_gemini_response(full_prompt)
 
     def summarizer(self,relevancy,user_query,context):
-        system_prompt_path=r"/home/chandrahaas/codes/test-apis/Bot/prompts/Summariser.md"
+        system_prompt_path=r"/home/chandrahaas/codes/Bot/prompts/Summariser.md"
         prompt=self.llm_obj.format_prompt('{replace_with_relevancy_score}',relevancy,system_prompt_path,isPath=True)
         prompt=self.llm_obj.format_prompt('{replace_with_context}',str(context),prompt)
         prompt=self.llm_obj.format_prompt('{replace_with_user_query}',user_query,prompt)
@@ -310,7 +310,7 @@ class EmbRag:
             for i in range(len(indices)):
 
                 if indices[i]!=-1 and distances[i]<2.0:    
-                    dic=lst[i]
+                    dic=lst[indices[i]]
                     content=dic['content']
                     ans.append(content)
                     if(distances[i]>1):
