@@ -7,4 +7,5 @@ requires-python = ">=3.10"
 dependencies = [
     "dotenv>=0.9.9",
     "google-genai>=1.29.0",
+    "fastmcp>=2.0.0",
 ]
