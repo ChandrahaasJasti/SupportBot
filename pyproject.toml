@@ -8,4 +8,6 @@ dependencies = [
     "dotenv>=0.9.9",
     "google-genai>=1.29.0",
     "fastmcp>=2.0.0",
+    "mcp[cli]>=1.12.4",
+    "pydantic>=2.11.7",
 ]
