@@ -346,7 +346,7 @@
         });
 
         // Send message
-        function sendMessage() {
+        async function sendMessage() {
             const message = chatInput.value.trim();
             const hasImage = selectedImage !== null;
             
@@ -375,11 +375,37 @@
             // Show typing indicator
             showTypingIndicator();
             
-            // Simulate bot response (replace with actual API call)
-            setTimeout(() => {
+            try {
+                // Prepare data for API
+                const requestData = {
+                    message: message,
+                    image: hasImage ? await convertImageToBase64(selectedImage) : null
+                };
+                
+                // Send to Flask API
+                const response = await fetch('http://localhost:5000/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Hide typing indicator and show bot response
                 hideTypingIndicator();
-                addMessage("I've received your message. This is a demo response - replace this with actual API integration.", 'bot');
-            }, 2000);
+                addMessage(data.message, 'bot');
+                
+            } catch (error) {
+                console.error('Error sending message:', error);
+                hideTypingIndicator();
+                addMessage("Sorry, I encountered an error. Please try again.", 'bot');
+            }
         }
 
         // Add text message
@@ -389,6 +415,20 @@
             messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Convert image to base64 for API
+        function convertImageToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Remove the data:image/jpeg;base64, prefix to get just the base64 string
+                    const base64 = e.target.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
         }
 
         // Add image message
@@ -454,8 +494,39 @@
             }
         });
 
+        // Load chat history on page load
+        async function loadChatHistory() {
+            try {
+                const response = await fetch('http://localhost:5000/api/chat/history');
+                if (response.ok) {
+                    const data = await response.json();
+                    // Clear existing messages except the welcome message
+                    const welcomeMessage = chatMessages.querySelector('.message.bot');
+                    chatMessages.innerHTML = '';
+                    if (welcomeMessage) {
+                        chatMessages.appendChild(welcomeMessage);
+                    }
+                    
+                    // Add chat history
+                    data.history.forEach(entry => {
+                        if (entry.user_message) {
+                            addMessage(entry.user_message, 'user');
+                        }
+                        if (entry.bot_response) {
+                            addMessage(entry.bot_response, 'bot');
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading chat history:', error);
+            }
+        }
+
         // Initial button state
         updateSendButton();
+        
+        // Load chat history when page loads
+        loadChatHistory();
     </script>
 </body>
 </html>
