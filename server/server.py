@@ -4,6 +4,15 @@ import os
 import logging
 from datetime import datetime
 import json
+import sys
+
+# Add the utils directory to the Python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+utils_dir = os.path.join(current_dir, '..', 'utils')
+sys.path.insert(0, utils_dir)
+
+# Import EmbRag
+from rag import EmbRag
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -23,6 +32,22 @@ app.config['PORT'] = int(os.environ.get('FLASK_PORT', 5000))
 
 # Global variables for chat history (in production, use a database)
 chat_history = []
+
+# Initialize EmbRag
+try:
+    # You can configure these paths as needed
+    docs_path = r"/home/chandrahaas/codes/Bot/DOCS"
+    faiss_path = r"/home/chandrahaas/codes/Bot/Faiss"
+    
+    # Create directories if they don't exist
+    os.makedirs(docs_path, exist_ok=True)
+    os.makedirs(faiss_path, exist_ok=True)
+    
+    rag_system = EmbRag(docs_path, faiss_path)
+    logger.info("EmbRag system initialized successfully")
+except Exception as e:
+    logger.error(f"Failed to initialize EmbRag: {str(e)}")
+    rag_system = None
 
 
 
@@ -44,10 +69,21 @@ def chat():
         # Log the incoming request
         logger.info(f"Received chat request: message='{message[:50]}...' image={bool(image_data)}")
         
-        # TODO: Integrate with AI service here
-        # For now, return a simple response
+        # Use EmbRag system for intelligent responses
+        if rag_system and message:
+            try:
+                # Get response from RAG system
+                rag_response = rag_system.queryDB(message)
+                response_message = rag_response if rag_response else "I couldn't find a relevant response for your query."
+            except Exception as e:
+                logger.error(f"Error in RAG system: {str(e)}")
+                response_message = "I encountered an error while processing your request. Please try again."
+        else:
+            # Fallback response for images or when RAG is not available
+            response_message = f"I received your message: '{message}'" if message else "I received your image"
+        
         response = {
-            'message': f"I received your message: '{message}'" if message else "I received your image",
+            'message': response_message,
             'timestamp': datetime.utcnow().isoformat(),
             'message_id': len(chat_history) + 1
         }

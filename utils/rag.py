@@ -6,7 +6,7 @@ from trafilatura import fetch_url, extract
 import pymupdf4llm
 import numpy as np 
 import requests
-from .auth import LLM
+from auth import LLM
 ENV_PATH=r"/home/chandrahaas/codes/Bot/.env"
 """ things remaining : chunker,faiss """
 class EmbRag:
