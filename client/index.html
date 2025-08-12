@@ -22,7 +22,7 @@
 
         .chat-container {
             width: 90%;
-            max-width: 800px;
+            max-width: 1100px;
             height: 80vh;
             background: white;
             border-radius: 20px;
@@ -30,6 +30,95 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+        }
+
+        /* New: wrapper to hold sidebar + chat area */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            min-height: 0; /* important for proper flex scrolling */
+        }
+
+        /* New: FAQ sidebar */
+        .faq-sidebar {
+            width: 280px;
+            background: #f9fafb;
+            border-right: 1px solid #e1e5e9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-sidebar-header {
+            background: #000000;
+            color: #fff;
+            padding: 16px 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .faq-sidebar-content {
+            padding: 12px 12px 16px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .faq-section-title {
+            font-size: 14px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0 6px;
+        }
+
+        .department-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 6px;
+        }
+
+        .department-item {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .department-item:hover {
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+
+        .department-name {
+            font-weight: 600;
+            color: #111827;
+            font-size: 14px;
+        }
+
+        .dept-count {
+            background: #111827;
+            color: #fff;
+            border-radius: 999px;
+            font-size: 12px;
+            padding: 2px 8px;
+        }
+
+        /* Chat area (existing UI moved inside) */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0; /* allow flex child to shrink */
         }
 
         .chat-header {
@@ -54,13 +143,8 @@
             align-items: flex-start;
         }
 
-        .message.user {
-            justify-content: flex-end;
-        }
-
-        .message.bot {
-            justify-content: flex-start;
-        }
+        .message.user { justify-content: flex-end; }
+        .message.bot { justify-content: flex-start; }
 
         .message-content {
             max-width: 70%;
@@ -101,10 +185,7 @@
             align-items: flex-end;
         }
 
-        .text-input-container {
-            flex: 1;
-            position: relative;
-        }
+        .text-input-container { flex: 1; position: relative; }
 
         .chat-input {
             width: 100%;
@@ -119,13 +200,9 @@
             max-height: 120px;
         }
 
-        .chat-input:focus {
-            border-color: #000000;
-        }
+        .chat-input:focus { border-color: #000000; }
 
-        .upload-container {
-            position: relative;
-        }
+        .upload-container { position: relative; }
 
         .image-upload-btn {
             background: #000000;
@@ -147,9 +224,7 @@
             transform: scale(1.05);
         }
 
-        .image-upload-btn i {
-            font-size: 20px;
-        }
+        .image-upload-btn i { font-size: 20px; }
 
         .file-input {
             position: absolute;
@@ -175,39 +250,12 @@
             min-width: 80px;
         }
 
-        .send-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
+        .send-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); }
+        .send-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        .send-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .preview-container {
-            margin-top: 10px;
-            display: none;
-        }
-
-        .image-preview {
-            max-width: 100px;
-            max-height: 100px;
-            border-radius: 8px;
-            border: 2px solid #e1e5e9;
-        }
-
-        .remove-image {
-            background: #000000;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 10px;
-        }
+        .preview-container { margin-top: 10px; display: none; }
+        .image-preview { max-width: 100px; max-height: 100px; border-radius: 8px; border: 2px solid #e1e5e9; }
+        .remove-image { background: #000000; color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 12px; margin-left: 10px; }
 
         .typing-indicator {
             display: none;
@@ -220,91 +268,87 @@
             margin-bottom: 15px;
         }
 
-        .typing-dots {
-            display: flex;
-            gap: 4px;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #000000;
-            border-radius: 50%;
-            animation: typing 1.4s infinite ease-in-out;
-        }
-
+        .typing-dots { display: flex; gap: 4px; }
+        .typing-dot { width: 8px; height: 8px; background: #000000; border-radius: 50%; animation: typing 1.4s infinite ease-in-out; }
         .typing-dot:nth-child(1) { animation-delay: -0.32s; }
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-            40% { transform: scale(1); opacity: 1; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
+
+        @media (max-width: 1024px) {
+            .chat-container { max-width: 95%; }
+            .faq-sidebar { width: 240px; }
         }
 
         @media (max-width: 768px) {
-            .chat-container {
-                width: 95%;
-                height: 90vh;
-            }
-            
-            .input-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .send-btn {
-                width: 100%;
-            }
+            .chat-container { width: 95%; height: 90vh; }
+            .content-wrapper { flex-direction: column; }
+            .faq-sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e1e5e9; }
+            .send-btn { width: 100%; }
         }
     </style>
+    <!-- YAML parser for client-side parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-header">
-            🤖 Support AI
-        </div>
-        
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot">
-                <div class="message-content">
-                    Hello! I'm here to help. You can type your questions or upload images for analysis.
+        <div class="content-wrapper">
+            <!-- FAQ Sidebar: Departments (2.2.1) -->
+            <aside class="faq-sidebar" id="faqSidebar">
+                <div class="faq-sidebar-header">
+                    <span>FAQs</span>
                 </div>
-            </div>
-        </div>
-        
-        <div class="typing-indicator" id="typingIndicator">
-            <div class="typing-dots">
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-            </div>
-        </div>
-        
-        <div class="chat-input-container">
-            <div class="input-row">
-                <div class="text-input-container">
-                    <textarea 
-                        class="chat-input" 
-                        id="chatInput" 
-                        placeholder="Type your message here..."
-                        rows="1"
-                    ></textarea>
+                <div class="faq-sidebar-content">
+                    <div class="faq-section-title">Departments</div>
+                    <ul class="department-list" id="departmentList"></ul>
                 </div>
-                
-                <div class="upload-container">
-                    <button class="image-upload-btn" id="uploadBtn" title="Upload Image">
-                        📷
-                    </button>
-                    <input type="file" class="file-input" id="fileInput" accept="image/*">
+            </aside>
+
+            <!-- Chat Area -->
+            <section class="chat-area">
+                <div class="chat-header">🤖 Support AI</div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot">
+                        <div class="message-content">
+                            Hello! I'm here to help. You can type your questions or upload images for analysis.
+                        </div>
+                    </div>
                 </div>
-                
-                <button class="send-btn" id="sendBtn" disabled>Send</button>
-            </div>
-            
-            <div class="preview-container" id="previewContainer">
-                <img class="image-preview" id="imagePreview">
-                <button class="remove-image" id="removeImage">Remove</button>
-            </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="input-row">
+                        <div class="text-input-container">
+                            <textarea 
+                                class="chat-input" 
+                                id="chatInput" 
+                                placeholder="Type your message here..."
+                                rows="1"
+                            ></textarea>
+                        </div>
+
+                        <div class="upload-container">
+                            <button class="image-upload-btn" id="uploadBtn" title="Upload Image">📷</button>
+                            <input type="file" class="file-input" id="fileInput" accept="image/*">
+                        </div>
+
+                        <button class="send-btn" id="sendBtn" disabled>Send</button>
+                    </div>
+
+                    <div class="preview-container" id="previewContainer">
+                        <img class="image-preview" id="imagePreview">
+                        <button class="remove-image" id="removeImage">Remove</button>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
@@ -319,7 +363,51 @@
         const removeImage = document.getElementById('removeImage');
         const typingIndicator = document.getElementById('typingIndicator');
 
+        const departmentListEl = document.getElementById('departmentList');
+
         let selectedImage = null;
+
+        // --- 2.2.1: Load and display departments from FAQ.yaml ---
+        async function loadDepartments() {
+            try {
+                // Relative to client/index.html
+                const res = await fetch('FAQ.yaml');
+                if (!res.ok) throw new Error('Failed to fetch FAQ.yaml');
+                const yamlText = await res.text();
+                const data = jsyaml.load(yamlText);
+                // data is expected to be an array of { department, question, answer }
+                const departments = [];
+                const deptToCount = new Map();
+                if (Array.isArray(data)) {
+                    for (const item of data) {
+                        const dept = (item && item.department) ? String(item.department).trim() : 'General';
+                        if (!deptToCount.has(dept)) {
+                            departments.push(dept);
+                            deptToCount.set(dept, 0);
+                        }
+                        deptToCount.set(dept, deptToCount.get(dept) + 1);
+                    }
+                }
+                renderDepartments(departments, deptToCount);
+            } catch (err) {
+                console.error('Error loading departments:', err);
+                departmentListEl.innerHTML = '<li style="color:#b91c1c">Failed to load departments</li>';
+            }
+        }
+
+        function renderDepartments(departments, deptToCount) {
+            departmentListEl.innerHTML = '';
+            departments.forEach(dept => {
+                const li = document.createElement('li');
+                li.className = 'department-item';
+                li.innerHTML = `<span class="department-name">${dept}</span><span class="dept-count">${deptToCount.get(dept) || 0}</span>`;
+                li.addEventListener('click', () => {
+                    // Placeholder for 2.2.2: On click, we will load FAQs for this department
+                    addMessage(`Selected department: ${dept}`, 'bot');
+                });
+                departmentListEl.appendChild(li);
+            });
+        }
 
         // Auto-resize textarea
         chatInput.addEventListener('input', function() {
@@ -328,14 +416,11 @@
             updateSendButton();
         });
 
-        // Update send button state
         function updateSendButton() {
             const hasText = chatInput.value.trim().length > 0;
             const hasImage = selectedImage !== null;
             sendBtn.disabled = !(hasText || hasImage);
         }
-
-
 
         // Remove selected image
         removeImage.addEventListener('click', function() {
@@ -345,70 +430,46 @@
             updateSendButton();
         });
 
-        // Send message
         async function sendMessage() {
             const message = chatInput.value.trim();
             const hasImage = selectedImage !== null;
-            
             if (!message && !hasImage) return;
 
-            // Add user message
-            if (message) {
-                addMessage(message, 'user');
-            }
-            
-            if (hasImage) {
-                addImageMessage(selectedImage, 'user');
-            }
+            if (message) { addMessage(message, 'user'); }
+            if (hasImage) { addImageMessage(selectedImage, 'user'); }
 
-            // Clear input
             chatInput.value = '';
             chatInput.style.height = 'auto';
-            
-            // Remove image
             selectedImage = null;
             fileInput.value = '';
             previewContainer.style.display = 'none';
-            
             updateSendButton();
-            
-            // Show typing indicator
+
             showTypingIndicator();
-            
+
             try {
-                // Prepare data for API
                 const requestData = {
                     message: message,
                     image: hasImage ? await convertImageToBase64(selectedImage) : null
                 };
-                
-                // Send to Flask API
+
                 const response = await fetch('http://localhost:5000/api/chat', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestData)
                 });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
-                
-                // Hide typing indicator and show bot response
                 hideTypingIndicator();
                 addMessage(data.message, 'bot');
-                
             } catch (error) {
                 console.error('Error sending message:', error);
                 hideTypingIndicator();
-                addMessage("Sorry, I encountered an error. Please try again.", 'bot');
+                addMessage('Sorry, I encountered an error. Please try again.', 'bot');
             }
         }
 
-        // Add text message
         function addMessage(text, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
@@ -417,12 +478,10 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Convert image to base64 for API
         function convertImageToBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Remove the data:image/jpeg;base64, prefix to get just the base64 string
                     const base64 = e.target.result.split(',')[1];
                     resolve(base64);
                 };
@@ -431,11 +490,9 @@
             });
         }
 
-        // Add image message
         function addImageMessage(file, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
-            
             const reader = new FileReader();
             reader.onload = function(e) {
                 messageDiv.innerHTML = `
@@ -449,20 +506,14 @@
             reader.readAsDataURL(file);
         }
 
-        // Show typing indicator
         function showTypingIndicator() {
             typingIndicator.style.display = 'block';
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Hide typing indicator
-        function hideTypingIndicator() {
-            typingIndicator.style.display = 'none';
-        }
+        function hideTypingIndicator() { typingIndicator.style.display = 'none'; }
 
-        // Event listeners
         sendBtn.addEventListener('click', sendMessage);
-        
         chatInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -470,17 +521,10 @@
             }
         });
 
-        // Make upload button clickable by triggering file input
-        uploadBtn.addEventListener('click', function() {
-            fileInput.click();
-        });
-
-        // Debug: Log when file input changes
+        uploadBtn.addEventListener('click', function() { fileInput.click(); });
         fileInput.addEventListener('change', function(e) {
-            console.log('File input changed:', e.target.files);
             const file = e.target.files[0];
             if (file && file.type.startsWith('image/')) {
-                console.log('Valid image file selected:', file.name);
                 selectedImage = file;
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -489,32 +533,20 @@
                 };
                 reader.readAsDataURL(file);
                 updateSendButton();
-            } else {
-                console.log('Invalid file type or no file selected');
             }
         });
 
-        // Load chat history on page load
         async function loadChatHistory() {
             try {
                 const response = await fetch('http://localhost:5000/api/chat/history');
                 if (response.ok) {
                     const data = await response.json();
-                    // Clear existing messages except the welcome message
                     const welcomeMessage = chatMessages.querySelector('.message.bot');
                     chatMessages.innerHTML = '';
-                    if (welcomeMessage) {
-                        chatMessages.appendChild(welcomeMessage);
-                    }
-                    
-                    // Add chat history
+                    if (welcomeMessage) { chatMessages.appendChild(welcomeMessage); }
                     data.history.forEach(entry => {
-                        if (entry.user_message) {
-                            addMessage(entry.user_message, 'user');
-                        }
-                        if (entry.bot_response) {
-                            addMessage(entry.bot_response, 'bot');
-                        }
+                        if (entry.user_message) { addMessage(entry.user_message, 'user'); }
+                        if (entry.bot_response) { addMessage(entry.bot_response, 'bot'); }
                     });
                 }
             } catch (error) {
@@ -522,11 +554,13 @@
             }
         }
 
-        // Initial button state
-        updateSendButton();
-        
-        // Load chat history when page loads
-        loadChatHistory();
+        // Init
+        function init() {
+            updateSendButton();
+            loadChatHistory();
+            loadDepartments();
+        }
+        init();
     </script>
 </body>
 </html>

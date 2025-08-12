@@ -34,7 +34,7 @@ The system will be developed in four progressive levels:
     2.2.1 - **Display Departments**: On entering the interface, Departments need to be prominently displayed
     2.2.2 - **Interactive Responses**: On clicking any Departments, the corresponding FAQs related to that department should be displayed
     2.2.3- **Scrollable UI**: The questions which are being displayed should be in scrollable format
-    2.2.3 - **Answering**: Each question should be clickable and should open a dropdown with the answer
+    2.2.4 - **Answering**: Each question should be clickable and should open a dropdown with the answer
 
 ### 2.3 FAQ Bar Functionality
 - **Collapsible Interface**: Once the user decides not to use FAQs, shrink the FAQ bar into a small button

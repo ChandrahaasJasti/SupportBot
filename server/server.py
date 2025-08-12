@@ -5,11 +5,15 @@ import logging
 from datetime import datetime
 import json
 import sys
+from flask import send_from_directory
 
 # Add the utils directory to the Python path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 utils_dir = os.path.join(current_dir, '..', 'utils')
 sys.path.insert(0, utils_dir)
+
+# Path to client assets (for serving index.html and static files)
+CLIENT_DIR = os.path.join(current_dir, '..', 'client')
 
 # Import EmbRag
 from rag import EmbRag
@@ -19,7 +23,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder=CLIENT_DIR, static_url_path='')
 
 # Enable CORS for cross-origin requests
 CORS(app)
@@ -49,6 +53,10 @@ except Exception as e:
     logger.error(f"Failed to initialize EmbRag: {str(e)}")
     rag_system = None
 
+# Serve frontend: index.html
+@app.route('/', methods=['GET'])
+def serve_index():
+    return app.send_static_file('index.html')
 
 
 @app.route('/api/chat', methods=['POST'])
