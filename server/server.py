@@ -7,22 +7,21 @@ import json
 import sys
 from flask import send_from_directory
 
-# Add the utils directory to the Python path
+# Add the project root to the Python path so package imports work
 current_dir = os.path.dirname(os.path.abspath(__file__))
-utils_dir = os.path.join(current_dir, '..', 'utils')
-sys.path.insert(0, utils_dir)
+project_root = os.path.abspath(os.path.join(current_dir, '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
-# Path to client assets (for serving index.html and static files)
-CLIENT_DIR = os.path.join(current_dir, '..', 'client')
-
-# Import EmbRag
-from rag import EmbRag
+# Import EmbRag from the utils package
+from utils.rag import EmbRag
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize Flask app
+CLIENT_DIR = os.path.join(current_dir, '..', 'client')
 app = Flask(__name__, static_folder=CLIENT_DIR, static_url_path='')
 
 # Enable CORS for cross-origin requests
@@ -57,7 +56,6 @@ except Exception as e:
 @app.route('/', methods=['GET'])
 def serve_index():
     return app.send_static_file('index.html')
-
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
@@ -124,8 +122,6 @@ def get_chat_history():
     except Exception as e:
         logger.error(f"Error retrieving chat history: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
-
-
 
 @app.errorhandler(404)
 def not_found(error):

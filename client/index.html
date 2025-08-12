@@ -113,6 +113,17 @@
             padding: 2px 8px;
         }
 
+        /* Added for 2.2.2 Questions list */
+        .section-divider { height: 1px; background: #e5e7eb; margin: 8px 6px; }
+        .faq-subheader { font-size: 13px; color: #374151; font-weight: 600; padding: 4px 6px; display:flex; align-items:center; justify-content: space-between; }
+        .back-button { background: transparent; border: none; color: #111827; font-size: 12px; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
+        .back-button:hover { background: #e5e7eb; }
+        .question-list { list-style: none; display: flex; flex-direction: column; gap: 8px; padding: 6px; }
+        .question-item { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 12px; cursor: pointer; transition: all 0.2s ease; }
+        .question-item:hover { border-color: #d1d5db; transform: translateY(-1px); }
+        .hidden { display: none; }
+        .department-item.active { outline: 2px solid #111827; }
+
         /* Chat area (existing UI moved inside) */
         .chat-area {
             flex: 1;
@@ -301,6 +312,16 @@
                 <div class="faq-sidebar-content">
                     <div class="faq-section-title">Departments</div>
                     <ul class="department-list" id="departmentList"></ul>
+
+                    <!-- 2.2.2: Questions for selected department -->
+                    <div class="section-divider"></div>
+                    <div class="faq-subheader">
+                        <span>Questions</span>
+                        <button class="back-button hidden" id="backToDepartments">Back</button>
+                    </div>
+                    <ul class="question-list" id="questionList">
+                        <li style="color:#6b7280; padding:6px;">Select a department to view FAQs</li>
+                    </ul>
                 </div>
             </aside>
 
@@ -364,29 +385,31 @@
         const typingIndicator = document.getElementById('typingIndicator');
 
         const departmentListEl = document.getElementById('departmentList');
+        const questionListEl = document.getElementById('questionList');
+        const backToDepartmentsBtn = document.getElementById('backToDepartments');
 
         let selectedImage = null;
+        let faqData = [];
+        let selectedDepartment = null;
 
         // --- 2.2.1: Load and display departments from FAQ.yaml ---
         async function loadDepartments() {
             try {
-                // Relative to client/index.html
                 const res = await fetch('FAQ.yaml');
                 if (!res.ok) throw new Error('Failed to fetch FAQ.yaml');
                 const yamlText = await res.text();
                 const data = jsyaml.load(yamlText);
-                // data is expected to be an array of { department, question, answer }
+                faqData = Array.isArray(data) ? data : [];
+
                 const departments = [];
                 const deptToCount = new Map();
-                if (Array.isArray(data)) {
-                    for (const item of data) {
-                        const dept = (item && item.department) ? String(item.department).trim() : 'General';
-                        if (!deptToCount.has(dept)) {
-                            departments.push(dept);
-                            deptToCount.set(dept, 0);
-                        }
-                        deptToCount.set(dept, deptToCount.get(dept) + 1);
+                for (const item of faqData) {
+                    const dept = (item && item.department) ? String(item.department).trim() : 'General';
+                    if (!deptToCount.has(dept)) {
+                        departments.push(dept);
+                        deptToCount.set(dept, 0);
                     }
+                    deptToCount.set(dept, deptToCount.get(dept) + 1);
                 }
                 renderDepartments(departments, deptToCount);
             } catch (err) {
@@ -402,12 +425,56 @@
                 li.className = 'department-item';
                 li.innerHTML = `<span class="department-name">${dept}</span><span class="dept-count">${deptToCount.get(dept) || 0}</span>`;
                 li.addEventListener('click', () => {
-                    // Placeholder for 2.2.2: On click, we will load FAQs for this department
-                    addMessage(`Selected department: ${dept}`, 'bot');
+                    if (selectedDepartment === dept) {
+                        selectedDepartment = null;
+                        updateActiveDepartment('');
+                        backToDepartmentsBtn.classList.add('hidden');
+                        questionListEl.innerHTML = '<li style="color:#6b7280; padding:6px;">Select a department to view FAQs</li>';
+                    } else {
+                        selectedDepartment = dept;
+                        updateActiveDepartment(dept);
+                        renderQuestionsForDepartment(dept);
+                    }
                 });
                 departmentListEl.appendChild(li);
             });
         }
+
+        function updateActiveDepartment(dept) {
+            const items = departmentListEl.querySelectorAll('.department-item');
+            items.forEach((el) => {
+                const name = el.querySelector('.department-name')?.textContent || '';
+                if (name === dept) el.classList.add('active'); else el.classList.remove('active');
+            });
+        }
+
+        // --- 2.2.2: Show FAQs for selected department ---
+        function renderQuestionsForDepartment(dept) {
+            // Toggle back button visibility
+            backToDepartmentsBtn.classList.remove('hidden');
+
+            const items = faqData.filter(it => (it.department || 'General') === dept);
+            if (items.length === 0) {
+                questionListEl.innerHTML = '<li style="color:#6b7280; padding:6px;">No FAQs found for this department</li>';
+                return;
+            }
+            questionListEl.innerHTML = '';
+            for (const it of items) {
+                const li = document.createElement('li');
+                li.className = 'question-item';
+                li.textContent = it.question;
+                // Store for 2.2.4 usage later
+                li.dataset.answer = it.answer || '';
+                questionListEl.appendChild(li);
+            }
+        }
+
+        backToDepartmentsBtn.addEventListener('click', () => {
+            selectedDepartment = null;
+            updateActiveDepartment('');
+            backToDepartmentsBtn.classList.add('hidden');
+            questionListEl.innerHTML = '<li style="color:#6b7280; padding:6px;">Select a department to view FAQs</li>';
+        });
 
         // Auto-resize textarea
         chatInput.addEventListener('input', function() {
