@@ -15,7 +15,7 @@ if project_root not in sys.path:
 
 # Import EmbRag from the utils package
 from utils.rag import EmbRag
-
+from utils.context import ContextManager
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -48,6 +48,7 @@ try:
     
     rag_system = EmbRag(docs_path, faiss_path)
     logger.info("EmbRag system initialized successfully")
+    context_obj=ContextManager()
 except Exception as e:
     logger.error(f"Failed to initialize EmbRag: {str(e)}")
     rag_system = None
@@ -79,8 +80,9 @@ def chat():
         if rag_system and message:
             try:
                 # Get response from RAG system
-                rag_response = rag_system.queryDB(message)
+                rag_response = rag_system.queryDB(message,context_obj)
                 response_message = rag_response if rag_response else "I couldn't find a relevant response for your query."
+                context_obj.add_context(message,response_message)
             except Exception as e:
                 logger.error(f"Error in RAG system: {str(e)}")
                 response_message = "I encountered an error while processing your request. Please try again."

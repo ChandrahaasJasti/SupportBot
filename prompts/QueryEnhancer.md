@@ -12,6 +12,8 @@
 
 5. **Context Integration:** When conversation context provides relevant details (names, dates, specific issues, etc.), incorporate these into the enhanced query to make it more precise and retrieval-friendly.
 
+6. **Optional Context:** Context is optional and may not always be provided. If no context is available, assume this is the first message in the conversation and enhance the query without additional context. Focus on improving clarity and searchability while maintaining the original meaning.
+
 **CONVERSATION CONTEXT FORMAT:**
 ```
 user_query: "question"
@@ -38,8 +40,10 @@ agent_response: "If you continue to have issues, contact IT support at support@c
 **Query:** "When will my next project meeting be?"
 **Enhanced Query:** "What is the schedule for our upcoming project meeting?"
 
-
-
 **INPUTS:**
 **CONTEXT:** {replace_with_context}
 **CURRENT_QUERY:** {replace_with_query}
+
+
+**OUTPUT FORMAT:**
+Should be a single paragraph which should be a summary of the context(if any) and the current query which can be used to search the database.

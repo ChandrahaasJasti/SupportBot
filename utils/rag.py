@@ -294,9 +294,10 @@ class EmbRag:
         prompt=self.llm_obj.format_prompt('{replace_with_user_query}',user_query,prompt)
         return self.llm_obj.get_gemini_response(prompt)
 
-    def queryDB(self,q):
+    def queryDB(self,q,context_obj):
         initial_q=q
-        q=self.queryEnhancer(q)
+        q=self.queryEnhancer(q,context_obj)
+        #print(q)
         vec=self.get_embedding(q).reshape(1,-1)
         index_path =Path(self.faiss_path+"/index.bin")
         if(index_path.exists()):
