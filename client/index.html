@@ -124,6 +124,14 @@
         .hidden { display: none; }
         .department-item.active { outline: 2px solid #111827; }
 
+        /* Added for 2.2.4 Answer dropdown */
+        .q-title { font-size: 14px; font-weight: 600; color: #111827; display:flex; align-items:center; justify-content: space-between; gap: 8px; }
+        .chevron { font-size: 12px; color: #6b7280; transition: transform 0.2s ease; }
+        .question-item.open .chevron { transform: rotate(90deg); }
+        .answer-panel { display: none; margin-top: 8px; border-top: 1px solid #f3f4f6; padding-top: 8px; background: #fafafa; border-radius: 8px; padding: 10px; }
+        .question-item.open .answer-panel { display: block; }
+        .answer-text { white-space: pre-wrap; font-size: 13px; color: #111827; }
+
         /* Chat area (existing UI moved inside) */
         .chat-area {
             flex: 1;
@@ -391,6 +399,22 @@
         let selectedImage = null;
         let faqData = [];
         let selectedDepartment = null;
+        let lastFaqHash = null;
+        const AUTO_REFRESH_MS = 5000; // auto-reload FAQ.yaml every 5s
+
+        // Simple fast hash for change detection (djb2)
+        function hashString(str) {
+            let hash = 5381;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) + hash) + str.charCodeAt(i);
+                hash = hash & 0xffffffff;
+            }
+            return String(hash);
+        }
+
+        function normalizeDept(value) {
+            return (value ? String(value) : 'General').trim();
+        }
 
         // --- 2.2.1: Load and display departments from FAQ.yaml ---
         async function loadDepartments() {
@@ -399,18 +423,17 @@
                 if (!res.ok) throw new Error('Failed to fetch FAQ.yaml');
                 const yamlText = await res.text();
                 const data = jsyaml.load(yamlText);
-                faqData = Array.isArray(data) ? data : [];
-
-                const departments = [];
+                const newData = Array.isArray(data) ? data : [];
+                const newHash = hashString(yamlText);
+                lastFaqHash = newHash;
+                faqData = newData;
+                
                 const deptToCount = new Map();
                 for (const item of faqData) {
-                    const dept = (item && item.department) ? String(item.department).trim() : 'General';
-                    if (!deptToCount.has(dept)) {
-                        departments.push(dept);
-                        deptToCount.set(dept, 0);
-                    }
-                    deptToCount.set(dept, deptToCount.get(dept) + 1);
+                    const dept = normalizeDept(item && item.department);
+                    deptToCount.set(dept, (deptToCount.get(dept) || 0) + 1);
                 }
+                const departments = Array.from(deptToCount.keys()).sort((a,b)=>a.localeCompare(b));
                 renderDepartments(departments, deptToCount);
             } catch (err) {
                 console.error('Error loading departments:', err);
@@ -418,6 +441,51 @@
             }
         }
 
+        // Preserve open question titles for current list
+        function getOpenQuestionSet() {
+            const open = new Set();
+            questionListEl.querySelectorAll('.question-item.open .q-title span:first-child').forEach(el => {
+                if (el && el.textContent) open.add(el.textContent);
+            });
+            return open;
+        }
+
+        // Auto-reload and update UI if FAQ.yaml changed
+        async function reloadFAQsIfChanged() {
+            try {
+                const res = await fetch('FAQ.yaml', { cache: 'no-cache' });
+                if (!res.ok) return;
+                const yamlText = await res.text();
+                const newHash = hashString(yamlText);
+                if (newHash === lastFaqHash) return; // no change
+
+                const data = jsyaml.load(yamlText);
+                const newData = Array.isArray(data) ? data : [];
+                lastFaqHash = newHash;
+                faqData = newData;
+
+                const deptToCount = new Map();
+                for (const item of faqData) {
+                    const dept = normalizeDept(item && item.department);
+                    deptToCount.set(dept, (deptToCount.get(dept) || 0) + 1);
+                }
+                const departments = Array.from(deptToCount.keys()).sort((a,b)=>a.localeCompare(b));
+                renderDepartments(departments, deptToCount);
+
+                if (selectedDepartment && deptToCount.has(selectedDepartment)) {
+                    const openSet = getOpenQuestionSet();
+                    renderQuestionsForDepartment(selectedDepartment, openSet);
+                } else {
+                    // Clear selection if removed
+                    selectedDepartment = null;
+                    backToDepartmentsBtn.classList.add('hidden');
+                    questionListEl.innerHTML = '<li style="color:#6b7280; padding:6px;">Select a department to view FAQs</li>';
+                }
+            } catch (e) {
+                console.error('Auto-reload FAQs failed:', e);
+            }
+        }
+        
         function renderDepartments(departments, deptToCount) {
             departmentListEl.innerHTML = '';
             departments.forEach(dept => {
@@ -439,7 +507,7 @@
                 departmentListEl.appendChild(li);
             });
         }
-
+        
         function updateActiveDepartment(dept) {
             const items = departmentListEl.querySelectorAll('.department-item');
             items.forEach((el) => {
@@ -447,13 +515,12 @@
                 if (name === dept) el.classList.add('active'); else el.classList.remove('active');
             });
         }
-
-        // --- 2.2.2: Show FAQs for selected department ---
-        function renderQuestionsForDepartment(dept) {
-            // Toggle back button visibility
+        
+        // --- 2.2.2 + 2.2.4: Show FAQs for selected department and toggle answers ---
+        function renderQuestionsForDepartment(dept, openSet = null) {
             backToDepartmentsBtn.classList.remove('hidden');
-
-            const items = faqData.filter(it => (it.department || 'General') === dept);
+            
+            const items = faqData.filter(it => normalizeDept(it && it.department) === dept);
             if (items.length === 0) {
                 questionListEl.innerHTML = '<li style="color:#6b7280; padding:6px;">No FAQs found for this department</li>';
                 return;
@@ -462,33 +529,59 @@
             for (const it of items) {
                 const li = document.createElement('li');
                 li.className = 'question-item';
-                li.textContent = it.question;
-                // Store for 2.2.4 usage later
-                li.dataset.answer = it.answer || '';
+                
+                const title = document.createElement('div');
+                title.className = 'q-title';
+                const titleText = document.createElement('span');
+                titleText.textContent = it.question;
+                const chevron = document.createElement('span');
+                chevron.className = 'chevron';
+                chevron.textContent = '›';
+                title.appendChild(titleText);
+                title.appendChild(chevron);
+                
+                const answerPanel = document.createElement('div');
+                answerPanel.className = 'answer-panel';
+                const answerText = document.createElement('div');
+                answerText.className = 'answer-text';
+                answerText.textContent = it.answer || '';
+                answerPanel.appendChild(answerText);
+                
+                li.appendChild(title);
+                li.appendChild(answerPanel);
+                
+                if (openSet && openSet.has(it.question)) {
+                    li.classList.add('open');
+                }
+                
+                li.addEventListener('click', () => {
+                    li.classList.toggle('open');
+                });
+                
                 questionListEl.appendChild(li);
             }
         }
-
+        
         backToDepartmentsBtn.addEventListener('click', () => {
             selectedDepartment = null;
             updateActiveDepartment('');
             backToDepartmentsBtn.classList.add('hidden');
             questionListEl.innerHTML = '<li style="color:#6b7280; padding:6px;">Select a department to view FAQs</li>';
         });
-
+        
         // Auto-resize textarea
         chatInput.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = Math.min(this.scrollHeight, 120) + 'px';
             updateSendButton();
         });
-
+        
         function updateSendButton() {
             const hasText = chatInput.value.trim().length > 0;
             const hasImage = selectedImage !== null;
             sendBtn.disabled = !(hasText || hasImage);
         }
-
+        
         // Remove selected image
         removeImage.addEventListener('click', function() {
             selectedImage = null;
@@ -496,36 +589,36 @@
             previewContainer.style.display = 'none';
             updateSendButton();
         });
-
+        
         async function sendMessage() {
             const message = chatInput.value.trim();
             const hasImage = selectedImage !== null;
             if (!message && !hasImage) return;
-
+            
             if (message) { addMessage(message, 'user'); }
             if (hasImage) { addImageMessage(selectedImage, 'user'); }
-
+            
             chatInput.value = '';
             chatInput.style.height = 'auto';
             selectedImage = null;
             fileInput.value = '';
             previewContainer.style.display = 'none';
             updateSendButton();
-
+            
             showTypingIndicator();
-
+            
             try {
                 const requestData = {
                     message: message,
                     image: hasImage ? await convertImageToBase64(selectedImage) : null
                 };
-
+                
                 const response = await fetch('http://localhost:5000/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestData)
                 });
-
+                
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 hideTypingIndicator();
@@ -536,7 +629,7 @@
                 addMessage('Sorry, I encountered an error. Please try again.', 'bot');
             }
         }
-
+        
         function addMessage(text, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
@@ -544,7 +637,7 @@
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-
+        
         function convertImageToBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -556,7 +649,7 @@
                 reader.readAsDataURL(file);
             });
         }
-
+        
         function addImageMessage(file, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
@@ -572,14 +665,14 @@
             };
             reader.readAsDataURL(file);
         }
-
+        
         function showTypingIndicator() {
             typingIndicator.style.display = 'block';
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-
+        
         function hideTypingIndicator() { typingIndicator.style.display = 'none'; }
-
+        
         sendBtn.addEventListener('click', sendMessage);
         chatInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -587,7 +680,7 @@
                 sendMessage();
             }
         });
-
+        
         uploadBtn.addEventListener('click', function() { fileInput.click(); });
         fileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -602,7 +695,7 @@
                 updateSendButton();
             }
         });
-
+        
         async function loadChatHistory() {
             try {
                 const response = await fetch('http://localhost:5000/api/chat/history');
@@ -620,12 +713,14 @@
                 console.error('Error loading chat history:', error);
             }
         }
-
+        
         // Init
         function init() {
             updateSendButton();
             loadChatHistory();
             loadDepartments();
+            // Auto-refresh FAQs
+            setInterval(reloadFAQsIfChanged, AUTO_REFRESH_MS);
         }
         init();
     </script>

@@ -36,12 +36,6 @@ The system will be developed in four progressive levels:
     2.2.3- **Scrollable UI**: The questions which are being displayed should be in scrollable format
     2.2.4 - **Answering**: Each question should be clickable and should open a dropdown with the answer
 
-### 2.3 FAQ Bar Functionality
-- **Collapsible Interface**: Once the user decides not to use FAQs, shrink the FAQ bar into a small button
-- **Button Placement**: Position the collapsed FAQ button on the send message tab, towards bottom left
-- **Toggle Functionality**: If user clicks the button again, the FAQs need to pop up and expand
-
----
 
 ## 3. Level 2: Intelligent Agent System
 

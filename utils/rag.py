@@ -280,9 +280,11 @@ class EmbRag:
         else:
             return embedding / norm
     
-    def queryEnhancer(self,user_input):
+    def queryEnhancer(self,user_input,context_obj):
+        context=context_obj.get_context()
         system_prompt_path=r"/home/chandrahaas/codes/Bot/prompts/QueryEnhancer.md"
         full_prompt=self.llm_obj.format_prompt('{replace_with_query}',user_input,system_prompt_path,isPath=True)
+        full_prompt=self.llm_obj.format_prompt('{replace_with_context}',str(context),full_prompt)
         return self.llm_obj.get_gemini_response(full_prompt)
 
     def summarizer(self,relevancy,user_query,context):
@@ -316,6 +318,7 @@ class EmbRag:
                     if(distances[i]>1):
                         RELEVANCY="bad"
             #print(RELEVANCY)
+            print(ans)
             return self.summarizer(RELEVANCY,initial_q,ans)
         else:
             print("no faiss index found")
