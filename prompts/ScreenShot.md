@@ -117,7 +117,7 @@ Correlate the User_Query with the screenshot to extract key, machine-usable fiel
 **EXAMPLES:**
 
 Example A (NO-OP: not a financial app):
-NO-OP
+
 
 Example B (JSON output):
 {

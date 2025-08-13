@@ -24,8 +24,8 @@ Json Schema:
     "sections": [string]|null,            // Section headers/panels visible on the screen.
     "filters": [string]|null              // Active filters/sort indicators shown on the UI
   },
-  "entities": {
-    "accounts": [
+  "entities": {                           // Structured entities extracted from the UI for downstream retrieval.
+    "accounts": [                         // Account cards/rows visible on screen.
       {
         "label": string|null,
         "masked_number": string|null,
@@ -37,7 +37,7 @@ Json Schema:
         }
       }
     ],
-    "transactions": [
+    "transactions": [                      // Transaction rows/items visible on the screen.
       {
         "id": string|null,
         "date": string|null,               // ISO 8601 if possible
@@ -47,7 +47,7 @@ Json Schema:
           "currency": string|null,
           "raw": string|null
         },
-        "status": string|null,
+        "status": string|null,            // Status (e.g., "Completed", "Pending", "Failed").
         "party": {
           "merchant": string|null,
           "beneficiary": string|null,
@@ -58,14 +58,14 @@ Json Schema:
         "notes_raw": string|null
       }
     ],
-    "errors": [
+    "errors": [                          // Errors/validations/warnings visible on screen.
       {
         "message": string|null,
-        "code": string|null,
+        "code": string|null,               // Error code if present (e.g., "UPI-408")
         "related_field_or_button": string|null
       }
     ],
-    "user_or_session": {
+    "user_or_session": {                  // User/session context visible on the screen.
       "user_label": string|null,
       "customer_id_masked": string|null,
       "app_version": string|null,
@@ -73,7 +73,7 @@ Json Schema:
     }
   },
   "rag_search_hints": {
-    "exact_strings": [string],            // exact text to use in vector/keyword search
+    "exact_strings": [string],            // Signals to improve vector/keyword retrieval.
     "entities": [string],                 // key entities (merchant names, IDs, error codes)
     "time_range": {
       "start": string|null,               // ISO 8601 if derivable
@@ -82,3 +82,7 @@ Json Schema:
   },
   "confidence": number                    // 0.0 to 1.0 for your comprehension quality
 }
+
+
+
+Using the above json schema, you will need to produce a query that can be used to retrieve the data from the data store.
