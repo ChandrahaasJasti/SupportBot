@@ -294,9 +294,9 @@ class EmbRag:
         prompt=self.llm_obj.format_prompt('{replace_with_user_query}',user_query,prompt)
         return self.llm_obj.get_gemini_response(prompt)
 
-    def queryDB(self,q,context_obj):
+    def queryDB(self,q):
         initial_q=q
-        q=self.queryEnhancer(q,context_obj)
+        #q=self.queryEnhancer(q)
         #print(q)
         vec=self.get_embedding(q).reshape(1,-1)
         index_path =Path(self.faiss_path+"/index.bin")
@@ -319,7 +319,7 @@ class EmbRag:
                     if(distances[i]>1):
                         RELEVANCY="bad"
             #print(RELEVANCY)
-            print(ans)
+            #print(ans)
             return self.summarizer(RELEVANCY,initial_q,ans)
         else:
             print("no faiss index found")

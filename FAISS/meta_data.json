@@ -1,0 +1,92 @@
+[
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 0,
+        "content": "# **mCAS User ID Activation Process ** 1. \u200b **Check your official email inbox:** You would have received an email from Finone.access@saarathifinance.com with your mCAS Web & Mobile Application login ID. 2. \u200b **Reset your password:** Use the Web URL provided in the system only to reset your password. 3. \u200b **Download the FinnOne Neo Mobile App:** Using the mCAS apk, download the app via your mobile device (supports Android users). # **Login Process - mCAS ** 1. \u200b **Enter your User ID and Password:** On the login screen, input your User ID and Password. 2. \u200b **Login with Biometric (Optional):** You can activate your Biometric for future logins. 3. \u200b **Login:** Click the \"Login\" button. # **mCAS - Home Screen ** 1. \u200b **Click on Application Sourcing:** From the home screen, click on \"Application Sourcing\" to log in to the application. # **mCAS - New Application Creation ** 1. \u200b **Click the '+' symbol:** On the \"Draft Applications\" screen, click the '+' symbol to create a new application. 2. \u200b **Select Product Category:** Choose \"Loan Against Property\" for Secured Loan or \"Personal Finance\" for Unsecured Loan. 3. \u200b **Select Application Type:** Select the relevant program as per the customer profile. For a fresh case, select \"New Application.\" # **mCAS - Add Applicant Process ** 1. \u200b **Select \"Applicant Details\":** On the \"What would you like to start with?\" screen, select \"Applicant Details.\" 2. \u200b **Click \"Add Primary Applicant\":** On the \"Add Applicant\" screen, click \"Add Primary Applicant.\" 3. \u200b **Choose a method to fetch applicant"
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 1,
+        "content": "details:** You can choose from Aadhaar eKYC, Scan QR, Alternate Entry, OCR, Manually, Copy Details, or Fetch Via CKYC. 4. \u200b **Select Customer Type:** Choose \"Individual\" or \"Corporate.\" 5. \u200b **Fill in Personal Details:** Enter salutation, first name, middle name (optional), last name, gender, date of birth, father's full name (optional), mother's maiden name (optional), marital status, and house/hotel type. 6. \u200b **Fill in General Details:** Enter citizenship, residential status, constitution, email ID, mobile number (and verify it), alternate mobile number (optional), SID code, phone number (optional), and preferred language of communication. Click \"Continue.\" 7. \u200b **Enter Identification Details:** Enter the customer's identification details, such as PAN, and click \"Continue.\""
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 2,
+        "content": "# **mCAS - How to complete AA (Account Aggregator) ** 1. \u200b **Initiate Account Aggregator:** On the \"Checks & Verifications\" screen, next to \"Account Aggregator,\" click \"Initiate.\""
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 3,
+        "content": "# **mCAS - Add Loan & Collateral Details ** 1. \u200b **Fill in Loan Details:** Enter branch, product (e.g., Mortgage Loan), scheme, loan purpose, sales agent, loan amount requested, tenure, rate of interest, and installment due day. Click \"Save Details.\" 2. \u200b **Open Collateral Tab & Fill Details:** Click on the \"Add Collateral\" tab and fill in the required details, including collateral sub-type, asset type, property type, whether property is identified, nature of property, purchase price, and asset address (address line 1, address line 2 (optional), address line 3 (optional), landmark). 3. \u200b **Search by Pincode:** You can search for the address by pincode. 4. \u200b **Enter Country, State, City, and Pincode:** Fill in these details for the collateral. 5. \u200b **Click \"Update\":** Click \"Update\" to save collateral details."
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 4,
+        "content": "# **mCAS - Collateral & Documents Upload ** 1. \u200b **Click on \"Documents\" TAB:** On the \"What would you like to start with?\" screen, click on the \"Upload Documents\" tab. 2. \u200b **Select the respective Applicant:** Using the '>' symbol, select the applicant (Primary Applicant, Co-Applicant, or Application) to upload documents. 3. \u200b **Select the relevant TAB to upload the documents:** Choose \"Digilocker,\" \"Upload Additional Document,\" or \"Check List.\" 4. \u200b **Use the search key to upload relevant documents:** Type the document name (e.g., PAN) in the search bar. 5. \u200b **Select option to upload document:** Choose from \"Camera,\" \"Gallery,\" or \"Document.\" 6. \u200b **Click \"Sync\" to save:** After selecting the documents, click \"Sync\" to save them. 7. \u200b **View/Change/Verify Uploaded Documents:** You can view, change, and verify the uploaded documents in the \"View\" tab."
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 5,
+        "content": "# **mCAS - Add Login Fee Details ** 1. \u200b **Click to Collect login fee from System:** On the \"What would you like to start with?\" screen, click the \"Upload Documents\" icon. 2. \u200b **Click on \"Processing Fees\" TAB:** From the expanded menu, click on the \"Processing Fees\" tab. # **mCAS - How to Collect - IMD fee ** 1. \u200b (No specific steps provided on this slide, only a general screen view.) # **mCAS - Review & File Submission ** 1. \u200b **Review and Submit the Loan Application:** Once all the fields are filled (4 tabs will turn green), click \"Review and Submit.\" 2. \u200b **Select the New code as \"SUBMIT\" & enter the remarks:** On the \"Review and Sign\" screen, choose \"SUBMIT\" as the Note Code and type your remarks in the \"Remarks\" field. 3. \u200b **Click on \"Submit Application\":** Click this button to submit the loan application. 4. \u200b **Loan Application Submitted Successfully:** A message will confirm that the application has been successfully generated and moved to the Branch Credit Queue. You can track the application by its Application ID."
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 6,
+        "content": "# **CAS - Login Process \u2013 Credit ** 1. \u200b **Login to CAS from system:** Use your credentials to log in to CAS. 2. \u200b **Using search TAB - enter & search for Application TAB:** On the home screen, use the search tab to find and select the \"Application TAB.\" # **CAS - Credit Queue Process ** 1. \u200b **Search for the loan application number generated from mCAS:** Enter the application ID (e.g., APPL00000854) in the search field. 2. \u200b **Click enter to search:** Initiate the search. 3. \u200b **Click on Application Number to enter the DDE:** Click on the application number in the search results to enter the DDE (Data Entry) stage. # **CAS - Credit Queue \u2013 DDE Stage (Applicant Details) ** 1. \u200b **Add or Remove if changes to be done in Applicant details:** You can modify applicant details at this stage. 2. \u200b **Add or Remove if changes to be done under loan details:** You can modify loan details at this stage. # **CAS - Credit Queue \u2013 DDE Stage (OVD Update) ** 1. \u200b **Save the change:** After making changes, click \"Save.\" This needs to be completed for all applicants and co-applicants. # **CAS - Credit Queue \u2013 DDE Stage (Loan Details Verification) ** 1. \u200b **Need to check the Product/Sourcing/Loan Amount/Tenurity:** Verify and update these details as necessary. # **CAS - Credit Queue \u2013 DDE Stage (Re-Payment Parameters) ** 1. \u200b **Verify and update:** Ensure the repayment amount, disbursal type, deductions, ROI, interest start date, broken period adjustments, and insurance"
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 7,
+        "content": "premium are correct."
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 8,
+        "content": "# **CAS - Credit Queue \u2013 DDE Stage (Collateral Stage) ** 1. \u200b **Capture Fair Market value/Collateral type/Property Address/size of the** **Property/Ownership details:** At this stage, you need to input these details. # **CAS - Credit Queue \u2013 DDE Stage (Documents TAB) ** 1. \u200b **Add or Remove if changes to be done under Documents TAB:** You can modify documents at this stage."
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 9,
+        "content": "# **CAS - Generate CRIF Report ** 1. \u200b **To Run CRIF report - > Summary Analysis > Credit Bureau Check:** Navigate to \"Summary Analysis\" and then \"Credit Bureau Check\" to run the CRIF report. - \u200b **Note:** This feature may not be live for all RMs/BMs and access might be given to selected team members. Please reach out to your respective BM/SH to get the CRIF report. # **CAS - Check & Verification (> Summary Analysis > KYC Check) ** 1. \u200b **At this stage - Credit can able to view the applicant/Co-Applicant KYC** **details:** Review the KYC details. 2. \u200b **Select the relevant drop down as per the KYC verifications:** Update the verification statuses using the dropdown menus. # **CAS - Check & Verification (> Summary Analysis > KYC Check \u2013 ** **PAN Verification) ** 1. \u200b **PAN Verification to be initiated and complete by clicking the highlighted** **TAB:** Initiate and complete the PAN verification process by clicking the designated tab. # **CAS - Bank Account Verification (> Applicant Details > Personal ** **information > Bank/Credit Card Status) ** 1. \u200b **Enter Applicant Bank Account details & Verify:** Input the applicant's bank account details and verify them. # **CAS - Customer Reference ** 1. \u200b **Minimum 2 business/Neighbour reference to be added:** Add at least two business or neighbor references. # **CAS - Credit Approval ** 1. \u200b **Click on Pencil symbol to add the credit recommendation & Sanction** **condition:** Click the pencil icon to add credit recommendations and sanction conditions. 2. \u200b **Credit"
+    },
+    {
+        "doc": "McaaS_Documentation.pdf",
+        "id": 10,
+        "content": "Approval and Sanction condition TAB:** This tab allows for managing credit approval and sanction conditions."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 0,
+        "content": "# **HR and mCAS FAQ Document ** ## **Insurance & Claims ** **Parental Coverage** No, the Group Insurance Policy does not include coverage for parents. However, an Optional Parental Insurance Policy is available. To opt for this policy, please contact your respective State HR representative. **Accessing Your Medical Card** You can download your medical card by logging into the **Activ Health App** and navigating to the **\"Download Medical Card\"** section. **Policy Coverage Details** The group insurance policy generally covers **hospitalization, surgeries, and** **maternity expenses** . For a complete list of inclusions, please refer to your policy document or contact the HR department. **Filing an Insurance Claim** For cashless claims: Visit a network hospital and fill out the pre-authorization form. For reimbursement claims: Submit the following original documents to the TPA or insurer within the required timeframe: 1. \u200b Hospital bills 2. \u200b Discharge summary 3. \u200b ID proof 4. \u200b Any other relevant medical documents **Required Documents for a Claim** The necessary documents for an insurance claim are: 1. \u200b Duly filled claim form 2. \u200b Discharge summary 3. \u200b Final hospital bill 4. \u200b Prescriptions and diagnostic reports 5. \u200b ID proof 6. \u200b Bank details (for reimbursement claims) **Point of Contact for Insurance** For all insurance-related queries, please contact **Deepak Kudave** at **9834716953** . **Cashless Hospital Network** You can view the full list of empanelled hospitals that support cashless claims on the **Active Health App** . **Adding Family Members** You can add your spouse and children to the policy during the **enrollment window**, subject"
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 1,
+        "content": "to policy terms. Please contact HR for assistance. **Insurance Claim Limit** The sum insured is specified in your policy. For your specific coverage limits, please refer to your **e-card** or contact HR directly."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 2,
+        "content": "## **Attendance & Leave ** **Marking Attendance** Use the **Zing HR app or web portal** to punch in and out for attendance. **Remote Punching** Yes, **location-based punching is allowed**, provided that geo-tagging is active. However, remote punches after 9:30 AM may be marked as late. **Late Attendance** Yes, punching in after 9:30 AM is considered a late mark. Unregularized late marks may result in a Loss of Pay (LOP). Ensure you regularize them promptly. **Regularizing Attendance** You can regularize attendance for **multiple days at once** through the Zing HR portal. The window to regularize an absence is open for **up to 15 days** from the date of occurrence. **Checking Leave Balance** Go to the **Leave tab** in the Zing HR portal to view your current leave balances. **Applying for Leave** To apply for leave: 1. \u200b Log in to Zing HR. 2. \u200b Navigate to **Leave** - **Apply Leave** . 3. \u200b Choose the leave type and date range. 4. \u200b Submit for manager approval. **Holiday List** The **Holiday Calendar for 2025** is available on the HR portal. You may also request a location-specific copy from HR. ## **Payroll ** **Payslip Download**"
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 3,
+        "content": "To download your payslip: 1. \u200b Log in to **Zing HR** . 2. \u200b Go to **Payroll** - **Payslip** . 3. \u200b Choose the desired month. 4. \u200b Click **Download** . **Payroll Cut-off Date** The payroll cut-off date is the **25th of each month** . Please ensure all necessary changes are submitted before this date. **Salary Credit Date** Salaries are typically credited by the **last working day of each month** . **Updating Bank Details** Submit a request to HR with a **cancelled cheque** or a copy of your bank passbook. Ensure this is done before the **20th of the month** for the changes to take effect in the current payroll cycle."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 4,
+        "content": "## **General HR & IT ** **ESI Card Application** If you are eligible for ESI, your ESI number will be provided by HR. You can then download your ESI card from the **ESIC portal** using your login credentials. **Updating Personal Details** You can update personal details like your address and phone number in the **\"Profile\"** section of the Zing HR portal, or you can contact HR for assistance. **ID Card Issues** For any issues with your ID card or visiting card, please contact the **HR team** . **Probation Review** Probation reviews are usually conducted at the end of **three months** . The process will be initiated by your manager or HR. **Performance Review Process** The performance review process involves a **self-review form**, followed by an evaluation from your manager. The final ratings and feedback will be discussed in a review meeting. **IT Support** For technical issues, please email **Suraj Kadam** at suraj.kadam@saarathifinance.com."
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 5,
+        "content": "## **mCAS (Mobile Cash Advance System) ** **Login Issues** If you have an incorrect password, use the **\"Forgot Password\"** link on the mCAS application login screen to reset it. You will receive an OTP on your official email ID to complete the process. **Locked ID** If your ID is locked, you must contact the system administrator or send an email to request an unlock. Include your **Employee Code / User ID** in the email. **Pincode Search** If a pincode is not visible, use the **\"Search by Pincode\"** link above the country dropdown. Enter the pincode first, and the city and state will auto-populate. **Account Aggregator (AA) Report** To pull an AA report: 1. \u200b Go to **\"Check and Verification\"** in the mCAS application. 2. \u200b Click **\"Initiate\"** in the Account Aggregator section. 3. \u200b Enter the customer's mobile number. 4. \u200b The customer will receive a prompt to complete the process on their phone. 5. \u200b Once complete, you can check the **FI Report Status** and **Analytics Status** . **Installment Due Date** The standard installment due date to be selected for all customers is the **5th of the** **month** . **Collecting a"
+    },
+    {
+        "doc": "RAG_DOC .pdf",
+        "id": 6,
+        "content": "Processing Fee** To collect a processing fee: 1. \u200b Go to the **\"Applicant Information\"** section. 2. \u200b Expand the options and click the **\"+\" button** to add a fee entry. 3. \u200b Choose **\"Electronic Fund Transfer\"** and tick the **\"OTP for Payment Link\"** checkbox. 4. \u200b Enter the amount and select the payment type. 5. \u200b Generate a payment link or QR code for the customer to use. 6. \u200b After the customer pays, click **\"Check Status\"** to validate the transaction."
+    }
+]
